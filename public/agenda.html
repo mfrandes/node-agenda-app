@@ -11,19 +11,43 @@
     <h1>Phone Book</h1>
     <p>TODO new table with 3 colums (first-name, Last - Name, Phone)</p>
 
-    
-
-
     <table>
         <thead>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
         </thead>
-        <tbody>
-
-        </tbody>
+        <tbody></tbody>
     </table>
+    <button id="newContactBtn">Add new contact</button>
+    
+    <div id="modal1" class="sec-modal">
+        <div class="modal-content">
+            <div class="close">+</div>
+            
+            <form action="">
+                <label for="lName">First Name</label>
+
+                <input id="lName" type="text" placeholder="Last Name">
+                
+                <label for="fName">Last Name</label>
+
+                <input id="fName"  type="text" placeholder="First Name">
+
+                <label for="phoneNumber">Phone Number</label>
+
+                <input id="phoneNumber" name="e-mail" type="number" placeholder="phoneNumber">
+
+                
+
+            </form>
+            <button id="submitBtn">Submit</button>
+
+        </div>
+    </div>
+
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
