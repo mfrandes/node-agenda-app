@@ -1,3 +1,5 @@
+/* optimizez cod 
+
 function displayAgenda(agenda) {
     console.log("I'm alive!", agenda);
     var resultList = document.querySelector('table tbody');
@@ -20,8 +22,24 @@ function initAgenda() {
         displayAgenda(agenda)
     })
 }
-initAgenda();
+initAgenda(); */
 
+function populateAgenda() {
+    $.ajax('data/agenda.json').done(function (contacts) {
+        var lisContacts = $('table tbody');
+        var resultList = contacts.map(function (contact) {
+            return `
+            <tr>
+            <td>${contact.fisrtName}</td>
+            <td>${contact.lastName}</td>
+            <td>${contact.phoneNumeber}</td>
+            </tr>
+    `;
+        });
+        lisContacts.html(resultList);
+    });
+};
+populateAgenda();
 /* new contact modal*/
 
 
@@ -46,14 +64,39 @@ function newContact() {
     var nln = $('#fName').val();
     var npn = $('#phoneNumber').val();
     $.getJSON("data/agenda.json", function (data) {
-        var newContact = { fisrtName: nfn, lastName: nln, phoneNumeber: npn }
+        var newContact = {
+            fisrtName: nfn,
+            lastName: nln,
+            phoneNumeber: npn
+        }
         data.push(newContact);
-        var newData = JSON.stringify(data);
-        jQuery.post('http://localhost:3000/data/agenda.json', {
+        var newData = JSON.stringify(newContact);
+        fs.writeFile('data/agenda.json', newData, 'utf8', function (err) {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        });
+
+
+
+
+        /*$.ajax({
+             type: 'POST',
+             data: newData,
+             url: 'data/agenda.json',
+             success: function(){
+                 console.info('data saved!')
+             },
+             error: function(){
+                 console.error('fail to save data')
+             }
+         });*/
+
+
+        /*jQuery.post('http://localhost:3000/data/agenda.json', {
             newData: newData
         }, function (response) {
             console.info("caontact saved")
-        })
+        })*/
     })
     console.log(nfn, nln, npn);
     document.getElementById("modal1").style.display = "none";
