@@ -1,103 +1,42 @@
-/* optimizez cod 
-
-function displayAgenda(agenda) {
-    console.log("I'm alive!", agenda);
-    var resultList = document.querySelector('table tbody');
-    var listItems = agenda.map(function (item) {
-
-        return `
-                <tr>
-                <td>${item.fisrtName}</td>
-                <td>${item.lastName}</td>
-                <td>${item.phoneNumeber}</td>
-                </tr>
-        `;
-    })
-
-    resultList.innerHTML = listItems.join('');
+function displayContacts(contacts){
+    var listContacts = $("table tbody");
+    var rows = contacts.map(function(contact){
+        return `<tr>
+        <td>${contact.fisrtName}</td>
+        <td>${contact.lastName}</td>
+        <td>${contact.phone}</td>
+        <td><a href="data/agenda.json?dlete=${contact.phone}">X</a></td>
+        </tr>`;
+    });
+   
+    listContacts.html(rows);
+    
 }
-function initAgenda() {
-    console.info('first step')
-    $.ajax('data/agenda.json').done(function (agenda) {
-        displayAgenda(agenda)
-    })
-}
-initAgenda(); */
 
-function populateAgenda() {
+
+function loadContacts(){
+    $.ajax("data/agenda.json").done(function(contacts){
+        displayContacts(contacts);
+    });
+}
+loadContacts();
+
+
+
+
+/*function populateAgenda() {
     $.ajax('data/agenda.json').done(function (contacts) {
-        var lisContacts = $('table tbody');
+        var listContacts = $('table tbody');
         var resultList = contacts.map(function (contact) {
             return `
             <tr>
             <td>${contact.fisrtName}</td>
             <td>${contact.lastName}</td>
-            <td>${contact.phoneNumeber}</td>
+            <td>${contact.phone}</td>
             </tr>
     `;
         });
-        lisContacts.html(resultList);
+        listContacts.html(resultList);
     });
 };
-populateAgenda();
-/* new contact modal*/
-
-
-document.getElementById("newContactBtn").onclick = displayModal;
-
-function displayModal() {
-    console.log('click pe mondal')
-    document.getElementById("modal1").style.display = "flex"
-}
-document.querySelector('.close').onclick = closeModal;
-function closeModal() {
-    document.getElementById("modal1").style.display = "none";
-}
-
-/* add new contact */
-
-
-document.getElementById("submitBtn").onclick = newContact;
-
-function newContact() {
-    var nfn = $('#lName').val();
-    var nln = $('#fName').val();
-    var npn = $('#phoneNumber').val();
-    $.getJSON("data/agenda.json", function (data) {
-        var newContact = {
-            fisrtName: nfn,
-            lastName: nln,
-            phoneNumeber: npn
-        }
-        data.push(newContact);
-        var newData = JSON.stringify(newContact);
-        fs.writeFile('data/agenda.json', newData, 'utf8', function (err) {
-            if (err) throw err;
-            console.log('The file has been saved!');
-        });
-
-
-
-
-        /*$.ajax({
-             type: 'POST',
-             data: newData,
-             url: 'data/agenda.json',
-             success: function(){
-                 console.info('data saved!')
-             },
-             error: function(){
-                 console.error('fail to save data')
-             }
-         });*/
-
-
-        /*jQuery.post('http://localhost:3000/data/agenda.json', {
-            newData: newData
-        }, function (response) {
-            console.info("caontact saved")
-        })*/
-    })
-    console.log(nfn, nln, npn);
-    document.getElementById("modal1").style.display = "none";
-}
+populateAgenda();*/
