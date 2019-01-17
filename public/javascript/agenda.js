@@ -5,7 +5,7 @@ function displayContacts(contacts){
         <td>${contact.fisrtName}</td>
         <td>${contact.lastName}</td>
         <td>${contact.phone}</td>
-        <td><a href="data/agenda.json?dlete=${contact.phone}">X</a></td>
+        <td><a href="/contacts/delete?phone=${contact.phone}">X</a></td>
         </tr>`;
     });
    
@@ -15,7 +15,7 @@ function displayContacts(contacts){
 
 
 function loadContacts(){
-    $.ajax("data/agenda.json").done(function(contacts){
+    $.ajax("data/contacts.json").done(function(contacts){
         displayContacts(contacts);
     });
 }
@@ -25,7 +25,7 @@ loadContacts();
 
 
 /*function populateAgenda() {
-    $.ajax('data/agenda.json').done(function (contacts) {
+    $.ajax('data/contacts.json').done(function (contacts) {
         var listContacts = $('table tbody');
         var resultList = contacts.map(function (contact) {
             return `
