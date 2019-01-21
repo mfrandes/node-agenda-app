@@ -1,26 +1,26 @@
 [
   {
-    "fisrtName": "Peter",
+    "firstName": "Peter",
     "lastName": "Griffin",
     "phone": "0743223342"
   },
   {
-    "fisrtName": "Louis",
+    "firstName": "Louis",
     "lastName": "Griffin",
     "phone": "0743223341"
   },
   {
-    "fisrtName": "Meg",
+    "firstName": "Meg",
     "lastName": "Griffin",
     "phone": "0743223343"
   },
   {
-    "fisrtName": "Glen",
+    "firstName": "Glen",
     "lastName": "Quagmaier",
     "phone": "0743223344"
   },
   {
-    "fisrtName": "Brian",
+    "firstName": "Brian",
     "lastName": "Griffin",
     "phone": "0743223345"
   }
