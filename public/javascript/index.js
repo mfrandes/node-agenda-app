@@ -79,12 +79,12 @@ function initevents() {
 }
 
 function doSearch(ev){
-    var value = this.value;
+    var value = this.value.toLowerCase();
     
 
     var filteredContacts = globalContacts.filter(function (contact){
         console.log(contact.firstName, value);
-        return contact.firstName == value;
+        return contact.firstName.toLowerCase().includes(value);
     });
    
 
