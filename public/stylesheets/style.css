@@ -6,6 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+#search{
+  margin-bottom: 5px;
+}
 table {
   border-collapse: collapse;
   width: 100%;

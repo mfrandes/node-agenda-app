@@ -32,9 +32,9 @@ function saveContact() {
         phone: phone // Es5 loger variant used when key is not the same as value variable name(not the case))
     }).done(function (response) {
         console.warn("done creating contact", response).
-        phoneToEdit = '';
+            phoneToEdit = '';
         if (response.success) {
-            
+
             loadContacts();
         }
     })
@@ -65,11 +65,11 @@ function initevents() {
     $("table").delegate("a.edit", "click", function () {
         phoneToEdit = this.getAttribute("data-id");
 
-        var contact = globalContacts.find(function(contact){
+        var contact = globalContacts.find(function (contact) {
             return contact.phone == phoneToEdit;
         })
         console.warn('TODO Edit', phoneToEdit, contact);
-        
+
         $('input[name=firstName]').val(contact.firstName);
         document.querySelector('input[name=lastName]').value = contact.lastName;
         $('input[name=phone]').val(contact.phone);
@@ -78,15 +78,17 @@ function initevents() {
     document.getElementById('search').addEventListener('input', doSearch);
 }
 
-function doSearch(ev){
+function doSearch(ev) {
     var value = this.value.toLowerCase();
-    
 
-    var filteredContacts = globalContacts.filter(function (contact){
-        console.log(contact.firstName, value);
-        return contact.firstName.toLowerCase().includes(value);
+
+    var filteredContacts = globalContacts.filter(function (contact) {
+        // console.log(contact.firstName, value);
+        return contact.firstName.toLowerCase().includes(value) ||
+         contact.lastName.toLowerCase().includes(value) ||
+          contact.phone.toLowerCase().includes(value);
     });
-   
+
 
     displayContacts(filteredContacts);
 }
