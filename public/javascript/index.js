@@ -75,30 +75,15 @@ function initevents() {
         $('input[name=phone]').val(contact.phone);
     });
 
+    document.getElementById('search').addEventListener('input', doSearch());
 }
 
+function doSearch(){
+    var value = this.value;
+    console.warn('please... search', value);
+}
 
 //start app
 
 initevents()
 loadContacts();
-
-
-
-
-/*function populateAgenda() {
-    $.ajax('data/contacts.json').done(function (contacts) {
-        var listContacts = $('table tbody');
-        var resultList = contacts.map(function (contact) {
-            return `
-            <tr>
-            <td>${contact.firstName}</td>
-            <td>${contact.lastName}</td>
-            <td>${contact.phone}</td>
-            </tr>
-    `;
-        });
-        listContacts.html(resultList);
-    });
-};
-populateAgenda();*/
