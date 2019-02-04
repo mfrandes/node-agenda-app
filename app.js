@@ -6,7 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var contactsRouter = require('./routes/contacts');
+//var contactsRouter = require('./routes/contacts');  //json inplementation
+var contactsRouter = require('./routes/contacts-db');  // data base inplementation
 
 var app = express();
 
@@ -22,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/contacts', contactsRouter);
+app.use('/contacts', contactsRouter); // watch var up
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
