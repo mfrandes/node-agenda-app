@@ -7,15 +7,6 @@ function loadContacts() {
     });
 }
 
-function getNewRow() {
-    return `<tr>
-        <td><input type="text" name="firstName" placeholder="Fisrt Name"/></td>
-        <td><input type="text" name="lastName" placeholder="Last Name"/></td>
-        <td><input type="text" name="phone" placeholder="Phone"/></td>
-        <td><button onclick="saveContact()" >Save</button></td>
-        </tr>`;
-}
-
 function saveContact() {
 
     var firstName = $('input[name=firstName]').val();
@@ -24,17 +15,16 @@ function saveContact() {
 
     console.log('save contact', firstName, lastName, phone);
 
-    var actionUrl = phoneToEdit ? 'contacts/update?phone=' + phoneToEdit : 'contacts/create'; // inline iff similat cu if (phoneToEdit){actionUrl=...}else {...}
+    var actionUrl = phoneToEdit ? 'contacts/update?id=' + phoneToEdit : 'contacts/create'; // inline iff similat cu if (phoneToEdit){actionUrl=...}else {...}
 
     $.post(actionUrl, {
         firstName, // shortcut from Es6 (key is the same as value variable name)
         lastName,
         phone: phone // Es5 loger variant used when key is not the same as value variable name(not the case))
     }).done(function (response) {
-        console.warn("done creating contact", response).
-            phoneToEdit = '';
+        console.warn("done creating contact", response);
+        phoneToEdit = '';
         if (response.success) {
-
             loadContacts();
         }
     })
@@ -48,13 +38,11 @@ function displayContacts(contacts) {
         <td>${contact.lastName}</td>
         <td>${contact.phone}</td>
         <td>
-            <a href="/contacts/delete?phone=${contact.phone}">&#10006;</a>
-            <a href="#" class="edit" data-id="${contact.phone}" >&#9998</a>
+            <a href="/contacts/delete?id=${contact.id}">&#10006;</a>
+            <a href="#" class="edit" data-id="${contact.id}" >&#9998</a>
         </td>
         </tr>`;
     });
-    //console.warn('rows', rows);
-    rows.push(getNewRow());
 
     //listContacts.html(rows);
     document.querySelector("tbody").innerHTML = rows.join('')
@@ -66,7 +54,7 @@ function initevents() {
         phoneToEdit = this.getAttribute("data-id");
 
         var contact = globalContacts.find(function (contact) {
-            return contact.phone == phoneToEdit;
+            return contact.id == phoneToEdit;
         })
         console.warn('TODO Edit', phoneToEdit, contact);
 
@@ -79,14 +67,15 @@ function initevents() {
 }
 
 function doSearch(ev) {
+    // var value = document.getElementById('search').value;
     var value = this.value.toLowerCase();
 
 
     var filteredContacts = globalContacts.filter(function (contact) {
         // console.log(contact.firstName, value);
         return contact.firstName.toLowerCase().includes(value) ||
-         contact.lastName.toLowerCase().includes(value) ||
-          contact.phone.toLowerCase().includes(value);
+            contact.lastName.toLowerCase().includes(value) ||
+            contact.phone.toLowerCase().includes(value);
     });
 
 

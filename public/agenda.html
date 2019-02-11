@@ -12,7 +12,7 @@
 
     <div>
         <input id="search" type="text">
-    </div>    
+    </div>
 
     <table>
         <thead>
@@ -24,16 +24,23 @@
             </tr>
         </thead>
         <tbody></tbody>
-
+        <tfoot>
+            <tr>
+                <td><input type="text" name="firstName" placeholder="Fisrt Name" /></td>
+                <td><input type="text" name="lastName" placeholder="Last Name" /></td>
+                <td><input type="text" name="phone" placeholder="Phone" /></td>
+                <td><button onclick="saveContact()">Save</button></td>
+            </tr>
+        </tfoot>
     </table>
-    
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
     <script src="./javascript/index.js"></script>
-    
+
 </body>
 
 </html>
