@@ -1,7 +1,14 @@
 var phoneToEdit = "";
 
+const API_URL = {
+    CREATE: "contacts/create",
+    READ: "contacts",
+    UPDATE: "contacts/update",
+    DELETE: "contacts/delete"
+}
+
 function loadContacts() {
-    $.ajax("contacts/").done(function (contacts) {
+    $.ajax(API_URL.READ).done(function (contacts) {
         window.globalContacts = contacts;
         displayContacts(contacts);
     });
@@ -15,7 +22,7 @@ function saveContact() {
 
     console.log('save contact', firstName, lastName, phone);
 
-    var actionUrl = phoneToEdit ? 'contacts/update?id=' + phoneToEdit : 'contacts/create'; // inline iff similat cu if (phoneToEdit){actionUrl=...}else {...}
+    var actionUrl = phoneToEdit ? API_URL.UPDATE + 'id=' + phoneToEdit : API_URL.CREATE; // inline iff similat cu if (phoneToEdit){actionUrl=...}else {...}
 
     $.post(actionUrl, {
         firstName, // shortcut from Es6 (key is the same as value variable name)
@@ -38,7 +45,7 @@ function displayContacts(contacts) {
         <td>${contact.lastName}</td>
         <td>${contact.phone}</td>
         <td>
-            <a href="/contacts/delete?id=${contact.id}">&#10006;</a>
+            <a href="${API_URL.DELETE}?id=${contact.id}">&#10006;</a>
             <a href="#" class="edit" data-id="${contact.id}" >&#9998</a>
         </td>
         </tr>`;
