@@ -6,7 +6,10 @@ const API_URL = {
     UPDATE: "contacts/update",
     DELETE: "contacts/delete"
 };
-
+// if we are on demo sitte url: https://mfrandes.github.io
+if (location.host === "mfrandes.github.io"){
+    API_URL.read = 'data/contacts.json'
+}
 function loadContacts() {
     $.ajax(API_URL.READ).done(function (contacts) {
         window.globalContacts = contacts;
