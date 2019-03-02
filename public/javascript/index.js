@@ -5,7 +5,7 @@ const API_URL = {
     READ: "contacts",
     UPDATE: "contacts/update",
     DELETE: "contacts/delete"
-}
+};
 
 function loadContacts() {
     $.ajax(API_URL.READ).done(function (contacts) {
